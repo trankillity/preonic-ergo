@@ -13,6 +13,7 @@
 #define HR_G_R RGUI_T(KC_SCLN)
 
 // Define editing layer shortcuts
+// Format: EL_Mod_Key
 #define EL_C_BCK LCTL(KC_BSPC)
 #define EL_C_DEL LCTL(KC_DEL)
 #define EL_C_HME LCTL(KC_HOME)
@@ -25,18 +26,23 @@
 #define EL_W_RGT C(G(KC_RGHT))
 #define EL_W_MAN G(KC_TAB)
 
-enum custom_keycodes {
-	BR_PNT, BR_SQR, BR_CRL, BR_RND
+// Tap Dance declarations
+enum {
+    BR_PNT,
+	BR_SQR,
+	BR_CRL,
+	BR_RND
 };
 
-enum bracket_shapes {
-    POINTY, SQUARE, CURLY, ROUND
+// Tap Dance definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [BR_PNT] = ACTION_TAP_DANCE_DOUBLE(S(KC_COMM), S(KC_DOT)),		// <,>
+    [BR_SQR] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),			// [,]
+    [BR_CRL] = ACTION_TAP_DANCE_DOUBLE(S(KC_LBRC), S(KC_RBRC)),		// {,}
+    [BR_RND] = ACTION_TAP_DANCE_DOUBLE(S(KC_9), S(KC_0))			// (,)
 };
-
-static bool type_brackets(uint8_t bracket_shape, bool pressed);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
 /* Base layer:
  * ,-----------------------------------------------------------------------------------.
  * |Rotary|   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  Del |
@@ -74,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,
         KC_TRNS,	KC_NO,		KC_NO,		EL_C_BCK,	EL_C_DEL,	KC_NO,		EL_C_HME,	EL_C_LFT,	KC_UP,		EL_C_RGT,	EL_C_END,	KC_NO,
         KC_TRNS,	KC_NO,		EL_S_HME,	KC_BSPC,	KC_DEL,		EL_S_END,	KC_HOME,	KC_LEFT,	KC_DOWN,	KC_RGHT,	KC_END,		KC_NO,
-        KC_TRNS,	KC_NO,		BR_PNT,		BR_SQR,		BR_CRL,		BR_RND,		KC_PGUP,	KC_VOLD,	KC_MNXT,	KC_VOLU,	KC_PGDN,	KC_NO,
+        KC_TRNS,	KC_NO,		TD(BR_PNT),	TD(BR_SQR),	TD(BR_CRL),	TD(BR_RND),	KC_PGUP,	KC_VOLD,	KC_MNXT,	KC_VOLU,	KC_PGDN,	KC_NO,
         KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_TRNS,	KC_TRNS,				KC_TRNS,	KC_MUTE,	KC_NO,		KC_NO,		KC_NO
         ),
 /* Numpad/Function layer:
@@ -104,11 +110,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[7] = LAYOUT_preonic_1x2uC(),
 	[8] = LAYOUT_preonic_1x2uC(),
 	[9] = LAYOUT_preonic_1x2uC(),
+/* Gaming layer:
+ * ,-----------------------------------------------------------------------------------.
+ * |Rotary|   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |  Del |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |BckSpc|
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Esc~ |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |   '  |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  |   /  |
+ * |------+------+------+------+------+-------------+------+------+------+------+------|
+ * |      | Ctrl |  Alt |   -  | Enter|    Space    |NumLyr|   =  | Left | Down | Right|
+ * `-----------------------------------------------------------------------------------'
+ */
 	[10] = LAYOUT_preonic_1x2uC(
-        KC_TRNS,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	KC_DEL,
-        KC_TAB,	KC_Q,	KC_W,	KC_E,	KC_R,	KC_T,	KC_Y,	KC_U,	KC_I,	KC_O,	KC_P,	KC_BSPC,
-        KC_GESC,	KC_A,	KC_S,	KC_D,	KC_F,	KC_G,	KC_H,	KC_J,	KC_K,	KC_L,	KC_SCLN,	KC_QUOT,
-        KC_LSFT,	KC_Z,	KC_X,	KC_C,	KC_V,	KC_B,	KC_N,	KC_M,	KC_COMM,	KC_DOT,	KC_UP,	KC_SLSH,
-        KC_TRNS,	KC_LCTL,	KC_LALT,	KC_MINS,	KC_ENT,	KC_SPC,	MO(2),	KC_EQL,	KC_LEFT,	KC_DOWN,	KC_RGHT
+        KC_TRNS,	KC_1,		KC_2,		KC_3,		KC_4,		KC_5,		KC_6,		KC_7,		KC_8,		KC_9,		KC_0,		KC_DEL,
+        KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSPC,
+        KC_GESC,	KC_A,		KC_S,		KC_D,		KC_F,		KC_G,		KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
+        KC_LSFT,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_UP,		KC_SLSH,
+        KC_TRNS,	KC_LCTL,	KC_LALT,	KC_MINS,	KC_ENT,		KC_SPC,					MO(2),		KC_EQL,		KC_LEFT,	KC_DOWN,	KC_RGHT
         )
 };
