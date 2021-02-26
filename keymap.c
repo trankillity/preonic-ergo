@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,		KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSPC,
 		KC_GESC,	HR_G_L,		HR_A_L,		HR_S_L,		HR_C_L,		KC_G,		KC_H,		HR_C_R,		HR_S_R,		HR_A_R,		HR_G_R,		KC_QUOT,
 		KC_BSLS,	KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_SLSH,	KC_NO,
-		TG(_GAME),	KC_LGUI,	KC_LSFT,	KC_MINS,	LT_EDT,           KC_SPC,           LT_NUM,		KC_EQL,	    KC_NO,  	KC_NO,  	KC_NO
+		TG(_GAME),	KC_LGUI,	KC_LSFT,	KC_MINS,	LT_EDT,           KC_SPC,           LT_NUM,     KC_EQL,     KC_NO,      KC_NO,      KC_NO
         ),
 /* Editing layer:
  * ,-----------------------------------------------------------------------------------.
@@ -97,11 +97,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 	[_EDIT] = LAYOUT_preonic_1x2uC(
-        KC_TRNS,	KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,		KC_NO,
-        KC_TRNS,	EL_CS_HME,  EL_C_BCK,   EL_A_UP,	EL_C_DEL,   EL_CS_END,	EL_C_HME,	EL_C_LFT,	KC_UP,		EL_C_RGT,	EL_C_END,	KC_NO,
-        KC_TRNS,	EL_S_HME,	KC_BSPC,    EL_A_DWN,	KC_DEL,		EL_S_END,	KC_HOME,	KC_LEFT,	KC_DOWN,	KC_RGHT,	KC_END,		KC_NO,
-        KC_TRNS,	EL_C_Z,     EL_C_X,     EL_C_C,     EL_C_V,     EL_CS_V,	KC_PGUP,	TD(BR_PNT),	TD(BR_SQR),	TD(BR_CRL),	KC_PGDN,	KC_NO,
-        KC_TRNS,	KC_NO,		KC_NO,		KC_NO,		KC_TRNS,	       KC_TRNS,	        KC_TRNS,	KC_NO,	    KC_NO,		KC_NO,		KC_NO
+        KC_TRNS,	KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,
+        KC_TRNS,    EL_CS_HME,  EL_C_BCK,   EL_A_UP,	EL_C_DEL,   EL_CS_END,  EL_C_HME,   EL_C_LFT,   KC_UP,      EL_C_RGT,   EL_C_END,   KC_NO,
+        KC_TRNS,	EL_S_HME,	KC_BSPC,    EL_A_DWN,	KC_DEL,     EL_S_END,   KC_HOME,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_END,     KC_NO,
+        KC_TRNS,    EL_C_Z,     EL_C_X,     EL_C_C,     EL_C_V,     EL_CS_V,    KC_PGUP,    TD(BR_PNT), TD(BR_SQR), TD(BR_CRL), KC_PGDN,    KC_NO,
+        KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_TRNS,          KC_TRNS,          KC_TRNS,    KC_NO,      KC_NO,      KC_NO,      KC_NO
         ),
 /* Numpad/Function layer:
  * ,-----------------------------------------------------------------------------------.
@@ -141,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,     KC_Q,		KC_W,		KC_E,		KC_R,		KC_T,		KC_Y,		KC_U,		KC_I,		KC_O,		KC_P,		KC_BSPC,
         KC_GESC,    KC_A,		KC_S,		KC_D,		KC_F,		KC_G,		KC_H,		KC_J,		KC_K,		KC_L,		KC_SCLN,	KC_QUOT,
         KC_LSFT,    KC_Z,		KC_X,		KC_C,		KC_V,		KC_B,		KC_N,		KC_M,		KC_COMM,	KC_DOT,		KC_UP,		KC_SLSH,
-        KC_TRNS,    KC_LCTL,	KC_LALT,	KC_MINS,	LT_EDT,		     KC_SPC,    	    LT_NUM,		KC_EQL,		KC_LEFT,	KC_DOWN,	KC_RGHT
+        KC_TRNS,    KC_LCTL,    KC_LALT,    KC_MINS,    LT_EDT,            KC_SPC,          LT_NUM,     KC_EQL,     KC_LEFT,    KC_DOWN,    KC_RGHT
         )
 };
 
