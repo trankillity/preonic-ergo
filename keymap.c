@@ -2,7 +2,7 @@
 
 // Declare layers
 enum {
-    _BASE,
+    _STDLYR = 0,
     _EDIT,
     _NUM,
     _GAME
@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Game |  GUI | Shft |  -   |EntEdt|    Space    |EntNum|   =  |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-    [_BASE] = LAYOUT_preonic_1x2uC(
+    [_STDLYR] = LAYOUT_preonic_1x2uC(
         KC_MPLY,    KC_1,       KC_2,       KC_3,       KC_4,       KC_5,       KC_6,       KC_7,       KC_8,       KC_9,       KC_0,       KC_DEL,
         KC_TAB,     KC_Q,       KC_W,       KC_E,       KC_R,       KC_T,       KC_Y,       KC_U,       KC_I,       KC_O,       KC_P,       KC_BSPC,
         KC_GESC,    HR_G_L,     HR_A_L,     HR_S_L,     HR_C_L,     KC_G,       KC_H,       HR_C_R,     HR_S_R,     HR_A_R,     HR_G_R,     KC_QUOT,
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |   \  |  C+Z |  C+C |  C+X |  C+V | CS+V | PgUp | <  > | [  ] | {  } | PgDn |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |      |      |      |      |      |    (hold)   |      |      |      |      |      |
+ * |      |      |      |      |(hold)|             |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
     [_EDIT] = LAYOUT_preonic_1x2uC(
@@ -145,22 +145,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         )
 };
 
-void encoder_update_user(uint8_t index, bool clockwise) {
-if (IS_LAYER_ON(0)) {
-        if (clockwise) {
-            register_code(KC_VOLU);
-            unregister_code(KC_VOLU);
-        } else {
-            register_code(KC_VOLD);
-            unregister_code(KC_VOLD);
-        }
-    } else {
-        if (clockwise) {
-            register_code(KC_VOLU);
-            unregister_code(KC_VOLU);
-        } else {
-            register_code(KC_VOLD);
-            unregister_code(KC_VOLD);
-        }
-    }
-}
+// Rotary encoder to be added later
+// void encoder_update_user(uint8_t index, bool clockwise) {
+// if (IS_LAYER_ON(_STDLYR)) {
+//         if (clockwise) {
+//             register_code(KC_VOLU);
+//             unregister_code(KC_VOLU);
+//         } else {
+//             register_code(KC_VOLD);
+//             unregister_code(KC_VOLD);
+//         }
+//     } else {
+//         if (clockwise) {
+//             register_code(KC_VOLU);
+//             unregister_code(KC_VOLU);
+//         } else {
+//             register_code(KC_VOLD);
+//             unregister_code(KC_VOLD);
+//         }
+//     }
+// }
