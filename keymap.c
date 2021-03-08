@@ -1,7 +1,5 @@
 #include QMK_KEYBOARD_H
 
-// __attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) { return true; }
-
 // Declare layers
 enum custom_layers {
     _QWERTY = 0,
@@ -132,9 +130,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |Rotary|      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |      |      |      |      |      | PgUp | BkSpc|  Up  |  Del | PgDn |      |
+ * | Tab  | PgUp | BkSpc|  Up  |  Del | PgDn |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc~ |      |      |      |      |      | Home | Left | Down | Right|  End |      |
+ * | Esc~ | Home | Left | Down | Right|  End |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  C+Z |  C+C |  C+X |  C+V |  C+Y |      | <  > | [  ] | {  } |      |      |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
@@ -143,8 +141,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_EDIT] = LAYOUT_preonic_1x2uC(
         _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    KC_PGUP,    KC_BSPC,    KC_UP,      KC_DEL,     KC_PGDN,    XXXXXXX,
-        _______,    KC_LGUI,    KC_LALT,    KC_LSFT,    KC_LCTL,    XXXXXXX,    KC_HOME,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_END,     XXXXXXX,
+        _______,    KC_PGUP,    KC_BSPC,    KC_UP,      KC_DEL,     KC_PGDN,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    
+        _______,    KC_HOME,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_END,     XXXXXXX,    KC_LCTL,    KC_LSFT,    KC_LALT,    KC_LGUI,    XXXXXXX,    
         _______,    EL_C_Z,     EL_C_X,     EL_C_C,     EL_C_V,     EL_C_Y,     XXXXXXX,    TD(BR_PNT), TD(BR_SQR), TD(BR_CRL), XXXXXXX,    XXXXXXX,
         _______,    _______,    _______,    _______,    _______,          _______,          _______,    _______,    _______,    _______,    _______
         ),
@@ -163,11 +161,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
     [_NUM] = LAYOUT_preonic_1x2uC(
-        _______,    KC_CIRC,      KC_NLCK,      KC_PSLS,      KC_PAST,      XXXXXXX,      XXXXXXX,    XXXXXXX,     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
-        _______,    KC_PERC,      KC_P7,      KC_P8,      KC_P9,      KC_PMNS,      _______,    _______,      _______,      _______,      _______,    XXXXXXX,
-        _______,    KC_DLR,      KC_P4,      KC_P5,      KC_P6,      KC_PSLS,      _______,     _______,      _______,      _______,      _______,    XXXXXXX,
-        XXXXXXX,    TD(BR_RND),      KC_P1,      KC_P2,      KC_P3,     KC_PEQL,      _______,     _______,      _______,      _______,      _______,    XXXXXXX,
-        XXXXXXX,    XXXXXXX,    KC_P0,    KC_PDOT,    _______,          _______,          _______,    _______,      _______,    _______,    XXXXXXX
+        _______,    KC_CIRC,    KC_NLCK,    KC_PSLS,    KC_PAST,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    KC_PERC,    KC_P7,      KC_P8,      KC_P9,      KC_PMNS,    XXXXXXX,
+        _______,    _______,    _______,    _______,    _______,    _______,    KC_DLR,     KC_P4,      KC_P5,      KC_P6,      KC_PSLS,    XXXXXXX,
+        XXXXXXX,    _______,    _______,    _______,    _______,    _______,    TD(BR_RND), KC_P1,      KC_P2,      KC_P3,      KC_PEQL,    XXXXXXX,
+        XXXXXXX,    XXXXXXX,    KC_P0,      KC_PDOT,    _______,          _______,          _______,    _______,    KC_PDOT,    XXXXXXX,    XXXXXXX
         ),
 /* Sys layer:
  * ,-----------------------------------------------------------------------------------.
@@ -183,91 +181,122 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
     [_SYS] = LAYOUT_preonic_1x2uC(
-        _______,    XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX,      RESET,
-        _______,    KC_F10,    KC_F7,       KC_F8,      KC_F9,      XXXXXXX,      XXXXXXX,      RGB_TOG,  RGB_HUI,   RGB_SAI,    RGB_VAI,       XXXXXXX,
-        _______,    KC_F11,    KC_F4,       KC_F5,      KC_F6,      KC_PSCR,      XXXXXXX,      RGB_MOD,   RGB_HUD,    RGB_SAD,   RGB_VAD, XXXXXXX,
-        _______,    KC_F12,    KC_F1,       KC_F2,      KC_F3,      KC_INS,      XXXXXXX,      QWERTY,     COLEMAK,     GAME,     XXXXXXX,      XXXXXXX,
-        KC_APP,      XXXXXXX,      XXXXXXX,      XXXXXXX,      _______,          _______,          _______,    XXXXXXX,      XXXXXXX,      XXXXXXX,      XXXXXXX
+        _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    RESET,
+        _______,    KC_F10,     KC_F7,      KC_F8,      KC_F9,      XXXXXXX,    XXXXXXX,    RGB_TOG,    RGB_HUI,    RGB_SAI,    RGB_VAI,    XXXXXXX,
+        _______,    KC_F11,     KC_F4,      KC_F5,      KC_F6,      KC_PSCR,    XXXXXXX,    RGB_MOD,    RGB_HUD,    RGB_SAD,    RGB_VAD,    XXXXXXX,
+        _______,    KC_F12,     KC_F1,      KC_F2,      KC_F3,      KC_INS,     XXXXXXX,    QWERTY,     COLEMAK,    GAME,       XXXXXXX,    XXXXXXX,
+        KC_APP,     XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,          _______,          _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX
         )
 };
 // clang-format on
 
 // Toggle system layer when both other layers are on.
 layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _EDIT, _NUM, _SYS);
+    return update_tri_layer_state(state, _EDIT, _NUM, _SYS);
+}
+#ifdef RGB_MATRIX_ENABLE
+// Set startup defaults
+void keyboard_post_init_user(void) {
+	rgb_matrix_set_color_all(166, 166, 166);
+	rgb_matrix_mode_noeeprom(1);
 }
 
-// uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-//     switch (keycode) {
-//         case HR_G_L:
-//             return TAPPING_TERM + 150;
-//         case HR_Q_G_R:
-//             return TAPPING_TERM + 150;
-//         case HR_Q_A_L:
-//             return TAPPING_TERM + 100;
-//         case HR_Q_A_R:
-//             return TAPPING_TERM + 100;
-//         case HR_Q_S_L:
-//             return TAPPING_TERM - 50;
-//         case HR_Q_S_R:
-//             return TAPPING_TERM - 50;
-//         case HR_C_G_R:
-//             return TAPPING_TERM + 150;
-//         case HR_C_A_L:
-//             return TAPPING_TERM + 100;
-//         case HR_C_A_R:
-//             return TAPPING_TERM + 100;
-//         case HR_C_S_L:
-//             return TAPPING_TERM - 50;
-//         case HR_C_S_R:
-//             return TAPPING_TERM - 50;
-//         case LT_EDT:
-//             return TAPPING_TERM - 75;
-//         case LT_NUM:
-//             return TAPPING_TERM - 75;
-//         default:
-//             return TAPPING_TERM;
-//     }
-// }
+// Turn off RGB when PC is suspended
+void suspend_power_down_user(void) {
+#ifdef RGB_MATRIX_ENABLE
+	rgb_matrix_set_suspend_state(true);
+#endif
+}
 
-// bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-//     switch (keycode) {
-//         case LT_EDT:
-//             return false;
-//         case LT_NUM:
-//             return false;
-//         default:
-//             return true;
-//     }
-// }
+// Use RGB as indicators
+void rgb_matrix_indicators_user(void) {
+    if (IS_LAYER_ON(_SYS)) {
+        rgb_matrix_set_color_all(207, 49, 31);
+    } else if (IS_LAYER_ON(_EDIT) || IS_LAYER_ON(_NUM)) {
+        rgb_matrix_set_color_all(120, 198, 214);
+    } else if (IS_LAYER_ON(_GAME)) {
+        rgb_matrix_set_color_all(97, 50, 33);
+    } else {
+        rgb_matrix_set_color_all(166, 166, 166);
+    }
+}
+#endif
+
+// Set the per key TAPPING_TERM
+#ifdef TAPPING_TERM_PER_KEY
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    if (IS_LAYER_ON(_QWERTY)) {
+        switch (keycode) {
+            case LGUI_T(KC_A):
+            case RGUI_T(KC_SCLN):
+                return TAPPING_TERM + 150;
+            case LALT_T(KC_S):
+            case LALT_T(KC_L):
+                return TAPPING_TERM + 100;
+            case LSFT_T(KC_D):
+            case RSFT_T(KC_K):
+                return TAPPING_TERM - 25;
+            case LCTL_T(KC_F):
+            case RCTL_T(KC_J):
+                return TAPPING_TERM + 25;
+            default:
+                return TAPPING_TERM;
+        }
+    } else if (IS_LAYER_ON(_COLEMAK)) {
+        switch (keycode) {
+            case LGUI_T(KC_A):
+            case RGUI_T(KC_O):
+                return TAPPING_TERM + 150;
+            case LALT_T(KC_R):
+            case LALT_T(KC_I):
+                return TAPPING_TERM + 100;
+            case LSFT_T(KC_S):
+            case RSFT_T(KC_E):
+                return TAPPING_TERM - 25;
+            case LCTL_T(KC_T):
+            case RCTL_T(KC_N):
+                return TAPPING_TERM + 25;
+            default:
+                return TAPPING_TERM;
+        }
+    }
+    switch (keycode) {
+        case LT_EDT:
+        case LT_NUM:
+            return TAPPING_TERM - 50;
+        default:
+            return TAPPING_TERM;
+    }
+}
+#endif
 
 #ifdef CAPSWORD_ENABLE
 // Caps word: deactivate caps lock following a word
 void process_caps_word(uint16_t keycode, keyrecord_t *record) {
-	// Get the base key code of a mod or layer tap
-	switch (keycode) {
-	case QK_MOD_TAP ... QK_MOD_TAP_MAX:
-	case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
-		if (!record->tap.count) { return; }
-		keycode = keycode & 0xFF;
-	}
-	// Toggle caps lock with the following key codes
-	switch (keycode) {
-	case KC_ESC:
-	case KC_SPC:
-	case KC_ENT:
-	case KC_TAB:
-	case KC_DOT:
-	case KC_COMM:
-		if (record->event.pressed) { tap_code(KC_CAPS); }
-	}
+// Get the base key code of a mod or layer tap
+    switch (keycode) {
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+            if (!record->tap.count) { return; }
+            keycode = keycode & 0xFF;
+    }
+    // Toggle caps lock with the following key codes
+    switch (keycode) {
+        case KC_ESC:
+        case KC_SPC:
+        case KC_ENT:
+        case KC_TAB:
+        case KC_DOT:
+        case KC_COMM:
+            if (record->event.pressed) { tap_code(KC_CAPS); }
+    }
 }
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef CAPSWORD_ENABLE
-	// Monitor key codes to toggle caps lock
-	if (host_keyboard_led_state().caps_lock) { process_caps_word(keycode, record); }
+// Monitor key codes to toggle caps lock
+if (host_keyboard_led_state().caps_lock) { process_caps_word(keycode, record); }
 #endif
     switch (keycode) {
         case QWERTY:
